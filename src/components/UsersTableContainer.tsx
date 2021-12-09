@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../bll/store";
 import UsersTable from "./UsersTable";
 import {Button} from "@mui/material";
+import {ModalAddUser} from "./ModalAddUser";
 
 
 const UsersTableContainer = () => {
@@ -15,7 +16,7 @@ const UsersTableContainer = () => {
         <div className={'tableWrapper'}>
             <div className={'tableHeader'}>
                 <h3>User list</h3>
-                <Button variant="contained">Add new</Button>
+                <ModalAddUser/>
             </div>
             <UsersTable users={users}/>
         </div>
