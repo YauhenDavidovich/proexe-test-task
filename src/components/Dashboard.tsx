@@ -4,16 +4,20 @@ import {fetchUsersTC} from "../bll/usersReducer";
 import PacksTable from "./UsersTable";
 import {AppRootStateType} from "../bll/store";
 import {Users} from "../dal/usersApi";
+import UsersTableContainer from "./UsersTableContainer";
 
 export const Dashboard = () => {
-    const users = useSelector<AppRootStateType, Array<Users>>(state=> state.users)
+
 
     const dispatch = useDispatch();
     useEffect(() => {
 
         dispatch(fetchUsersTC());
     }, [dispatch])
-    return (<div><PacksTable users={users}/>
+    return (<div className="mainBlock">
+            <h2>Dashboard</h2>
+            <UsersTableContainer/>
+
         </div>
     )
 }

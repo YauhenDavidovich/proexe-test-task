@@ -12,7 +12,7 @@ type UsersPropsType = {
     users: Array<Users>
 }
 
-const PacksTable = (props: UsersPropsType) => {
+const UsersTable = (props: UsersPropsType) => {
 
     const styleHeader = {
         backgroundColor: "#808080"
@@ -68,4 +68,4 @@ const PacksTable = (props: UsersPropsType) => {
 }
 
 
-export default PacksTable
+export default UsersTable
