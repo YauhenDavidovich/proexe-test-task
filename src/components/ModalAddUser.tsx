@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import {useDispatch, useSelector} from "react-redux";
 import {SuperButton} from "./SuperButton";
 import {useFormik} from "formik";
+import {addUserTC} from "../bll/usersReducer";
 
 type FormikErrorType = {
     name?: string
@@ -49,7 +50,7 @@ export const ModalAddUser = () => {
 
         },
         onSubmit: values => {
-            console.log(values.email, values.name)
+            dispatch(addUserTC(values.name, values.email))
             formik.resetForm()
             setOpen(false);
         },
