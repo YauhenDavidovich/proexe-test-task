@@ -13,12 +13,21 @@ import {addUserTC} from "../bll/usersReducer";
 
 type FormikErrorType = {
     name?: string
+    username?: string
+    city?: string
     email?: string
 }
 
+type ModalUpdateUserPropsType = {
+    name: string
+    username: string
+    city: string
+    email: string
+}
 
-export const ModalAddUser = () => {
+export const ModalUpdateUser = (props:ModalUpdateUserPropsType) => {
     const [open, setOpen] = React.useState(false);
+
     const dispatch = useDispatch()
 
     const handleClickOpen = () => {
@@ -29,13 +38,15 @@ export const ModalAddUser = () => {
         setOpen(false);
     };
 
-    const buttonAddStyle: React.CSSProperties = {backgroundColor: "powderblue", color: "white"}
+    const buttonAddStyle: React.CSSProperties = {backgroundColor: "orange", color: "white"}
+
 
     const formik = useFormik({
         initialValues: {
-            email: "",
-            name: ""
-        },
+            email: props.email,
+            name: props.name,
+            username: props.username,
+            city: props.city},
         validate: (values) => {
             const errors: FormikErrorType = {};
             if (!values.email) {
@@ -46,11 +57,17 @@ export const ModalAddUser = () => {
             if (!values.name) {
                 errors.name = 'Name required'
             }
+            if (!values.username) {
+                errors.username = 'Username required'
+            }
+            if (!values.city) {
+                errors.city = 'City required'
+            }
             return errors;
 
         },
         onSubmit: values => {
-            dispatch(addUserTC(values.name, values.email))
+            // dispatch(updateUserTC(values.name, values.email))
             formik.resetForm()
             setOpen(false);
         },
@@ -59,10 +76,10 @@ export const ModalAddUser = () => {
 
     return (
         <div>
-            <SuperButton callback={handleClickOpen} title={"Add user"} style={buttonAddStyle}/>
+            <SuperButton callback={handleClickOpen} title={"Update"} style={buttonAddStyle}/>
             <Dialog open={open} onClose={handleClose}>
                 <form onSubmit={formik.handleSubmit}>
-                <DialogTitle>Create new user</DialogTitle>
+                <DialogTitle>Update user</DialogTitle>
                 <DialogContent>
                         <TextField
                             autoFocus
@@ -76,6 +93,30 @@ export const ModalAddUser = () => {
                         />
                     {formik.touched.name && formik.errors.name &&
                     <div style={{color: "red"}}>{formik.errors.name}</div>}
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="username"
+                        label="User name"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        {...formik.getFieldProps("username")}
+                    />
+                    {formik.touched.username && formik.errors.username &&
+                    <div style={{color: "red"}}>{formik.errors.username}</div>}
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="city"
+                        label="City"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        {...formik.getFieldProps("city")}
+                    />
+                    {formik.touched.city && formik.errors.city &&
+                    <div style={{color: "red"}}>{formik.errors.city}</div>}
                         <TextField
                             autoFocus
                             margin="dense"

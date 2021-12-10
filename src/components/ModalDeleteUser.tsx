@@ -36,9 +36,7 @@ export const ModalDeleteUser = (props: ModalDeleteUserPropsType) => {
 
     return (
         <div>
-
             <SuperButton callback={handleClickOpen} title={"Delete"} style={buttonAddStyle}/>
-
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Delete User</DialogTitle>
                 <DialogContent>

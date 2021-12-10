@@ -14,10 +14,12 @@ export const Dashboard = () => {
 
         dispatch(fetchUsersTC());
     }, [dispatch])
-    return (<div className="mainBlock">
+    return (<div className={'main'}>
             <h2>Dashboard</h2>
-            <UsersTableContainer/>
-
+            <div className="mainBlock">
+                <UsersTableContainer/>
+            </div>
         </div>
+
     )
 }

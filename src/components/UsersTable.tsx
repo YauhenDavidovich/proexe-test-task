@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import {Paper} from "@mui/material";
 import {Users} from "../dal/usersApi";
 import {ModalDeleteUser} from "./ModalDeleteUser";
+import {ModalUpdateUser} from "./ModalUpdateUser";
 
 type UsersPropsType = {
     users: Array<Users>
@@ -54,13 +55,23 @@ const UsersTable = (props: UsersPropsType) => {
                                 },
                             }}
                         >
-                            <TableCell component="th" scope="row" align="left">{row.id}</TableCell>
+                            <TableCell component="th" scope="row" align="left"
+                                       style={{
+                                           maxWidth: 150,
+                                           width: 150,
+                                           textOverflow: "ellipsis",
+                                           overflow: "hidden"
+                                       }}>{row.id}</TableCell>
                             <TableCell align="left">{row.name}</TableCell>
                             <TableCell align="left">{row.username}</TableCell>
                             <TableCell align="left">{row.address.city}</TableCell>
                             <TableCell align="left">{row.email}</TableCell>
                             <TableCell align="left">
                                 <ModalDeleteUser userId={row.id} name={row.name}/>
+                                <ModalUpdateUser name={row.name}
+                                                 email={row.email}
+                                                 username={row.username}
+                                                 city={row.address.city}/>
                             </TableCell>
                         </TableRow>
                     ))}
