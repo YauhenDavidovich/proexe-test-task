@@ -20,6 +20,7 @@ const UsersTable = (props: UsersPropsType) => {
     const styleHeader = {
         backgroundColor: "#808080"
     }
+
     const {items, requestSort, sortConfig} = useSortableData(props.users);
     const getClassNamesForHeaders = (name: string) => {
         if (!sortConfig) {
@@ -60,7 +61,7 @@ const UsersTable = (props: UsersPropsType) => {
                 <TableBody>
                     {items.map((row, index) => (
                         <TableRow
-                            key={`${index}${row.name}`}
+                            key={row.id}
                             sx={{
                                 "&:last-child td, &:last-child th": {border: 0}, "&:nth-of-type(odd)": {
                                     backgroundColor: "#F8F7FD",

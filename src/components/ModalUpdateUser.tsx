@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 import {SuperButton} from "./SuperButton";
 import {useFormik} from "formik";
 import {updateUserTC} from "../bll/usersReducer";
+import {useEffect} from "react";
 
 type FormikErrorType = {
     name?: string
@@ -27,7 +28,6 @@ type ModalUpdateUserPropsType = {
 
 export const ModalUpdateUser = (props:ModalUpdateUserPropsType) => {
     const [open, setOpen] = React.useState(false);
-
     const dispatch = useDispatch()
 
     const handleClickOpen = () => {
@@ -39,7 +39,6 @@ export const ModalUpdateUser = (props:ModalUpdateUserPropsType) => {
     };
 
     const buttonAddStyle: React.CSSProperties = {backgroundColor: "orange", color: "white"}
-
 
     const formik = useFormik({
         initialValues: {
@@ -72,6 +71,13 @@ export const ModalUpdateUser = (props:ModalUpdateUserPropsType) => {
             setOpen(false);
         },
     });
+
+    useEffect(() => {
+        formik.setFieldValue('name', props.name);
+        formik.setFieldValue('username', props.username);
+        formik.setFieldValue('city', props.city);
+        formik.setFieldValue('email', props.email);
+    }, [props.email, props.username, props.city, props.name])
 
 
     return (
