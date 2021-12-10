@@ -68,7 +68,8 @@ const UsersTable = (props: UsersPropsType) => {
                             <TableCell align="left">{row.email}</TableCell>
                             <TableCell align="left">
                                 <ModalDeleteUser userId={row.id} name={row.name}/>
-                                <ModalUpdateUser name={row.name}
+                                <ModalUpdateUser userId={row.id}
+                                                 name={row.name}
                                                  email={row.email}
                                                  username={row.username}
                                                  city={row.address.city}/>

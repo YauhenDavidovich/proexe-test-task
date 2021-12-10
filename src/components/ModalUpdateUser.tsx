@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import {useDispatch, useSelector} from "react-redux";
 import {SuperButton} from "./SuperButton";
 import {useFormik} from "formik";
-import {addUserTC} from "../bll/usersReducer";
+import {addUserTC, updateUserTC} from "../bll/usersReducer";
 
 type FormikErrorType = {
     name?: string
@@ -19,6 +19,7 @@ type FormikErrorType = {
 }
 
 type ModalUpdateUserPropsType = {
+    userId: number| string
     name: string
     username: string
     city: string
@@ -67,7 +68,7 @@ export const ModalUpdateUser = (props:ModalUpdateUserPropsType) => {
 
         },
         onSubmit: values => {
-            // dispatch(updateUserTC(values.name, values.email))
+            dispatch(updateUserTC(props.userId, values.name, values.username, values.city, values.email))
             formik.resetForm()
             setOpen(false);
         },
@@ -133,7 +134,7 @@ export const ModalUpdateUser = (props:ModalUpdateUserPropsType) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type={"submit"}>Add</Button>
+                    <Button type={"submit"}>Update</Button>
                 </DialogActions>
             </form>
             </Dialog>

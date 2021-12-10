@@ -12,13 +12,22 @@ export const usersReducer = (state: Array<Users> = initialState, action: Actions
             return [{...action.user}, ...state]
         case DELETE_USER:
             return state.filter(user => user.id !== action.userId)
+        case UPDATE_USER:
+            return state.map(user => user.id === action.userId ?
+                {...user,
+                    name: action.name,
+                    username: action.username,
+                    address: {...user.address, city: action.city },
+                    email: action.email }: user)
         default:
             return state
     }
 }
 
+const unique_id = uuid();
+
 const defaultUser = {
-    "id": 1,
+    "id": unique_id,
     "name": "Default User",
     "username": "default",
     "email": "test@april.biz",
@@ -41,15 +50,23 @@ const defaultUser = {
     }
 }
 
-const unique_id = uuid();
 
 const SET_USERS = "/users/SET-USERS"
 const ADD_USER = "/users/ADD-USER"
 const DELETE_USER = "/users/DELETE-USER"
+const UPDATE_USER = "/users/UPDATE-USER"
 
 export const setUsersDataAC = (users: Array<Users>) => ({type: SET_USERS, users} as const)
 export const addUserAC = (user: Users) => ({type: ADD_USER, user} as const)
 export const deleteUserAC = (userId: number | string) => ({type: DELETE_USER, userId} as const)
+export const updateUserAC = (userId: number | string, name: string, username: string, city: string, email: string) => ({
+    type: UPDATE_USER,
+    userId,
+    name,
+    username,
+    city,
+    email
+} as const)
 
 
 // thunks
@@ -64,25 +81,31 @@ export const fetchUsersTC = () => {
 
 export const addUserTC = (name: string, email: string) => {
     return (dispatch: ThunkDispatch) => {
-        dispatch(addUserAC({...defaultUser, name: name, email: email, id: unique_id}))
+        dispatch(addUserAC({...defaultUser, name: name, email: email}))
     }
 }
 
-export const deleteUserTC = (id: number| string) => {
+export const deleteUserTC = (id: number | string) => {
     return (dispatch: ThunkDispatch) => {
         dispatch(deleteUserAC(id))
     }
 }
 
-
+export const updateUserTC = (userId: number | string, name: string, username: string, city: string, email: string) => {
+    return (dispatch: ThunkDispatch) => {
+        dispatch(updateUserAC(userId, name, username, city, email))
+    }
+}
 // types
 export type SetUsersDataActionType = ReturnType<typeof setUsersDataAC>;
 export type AddUserActionType = ReturnType<typeof addUserAC>;
 export type DeleteUserActionType = ReturnType<typeof deleteUserAC>;
+export type UpdateUserActionType = ReturnType<typeof updateUserAC>;
 
 type ActionsType =
     | SetUsersDataActionType
     | AddUserActionType
     | DeleteUserActionType
+    | UpdateUserActionType
 
 type ThunkDispatch = Dispatch<ActionsType>
