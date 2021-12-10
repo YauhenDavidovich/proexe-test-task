@@ -6,7 +6,7 @@ const instance = axios.create({
 });
 
 export interface Users {
-    id:       number;
+    id:       number | string;
     name:     string;
     username: string;
     email:    string;

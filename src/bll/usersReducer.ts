@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux'
 import {Users, usersAPI} from "../dal/usersApi";
+import { v4 as uuid } from 'uuid';
 
 const initialState: Array<Users> = []
 
@@ -38,6 +39,7 @@ const defaultUser = {
         }
     }
 
+const unique_id = uuid();
 
 const SET_USERS = "/users/SET-USERS"
 const ADD_USER = "/users/ADD-USER"
@@ -59,7 +61,7 @@ export const fetchUsersTC = () => {
 
 export const addUserTC = (name: string, email: string) => {
     return (dispatch: ThunkDispatch) => {
-        dispatch(addUserDataAC({...defaultUser, name:name, email:email}))
+        dispatch(addUserDataAC({...defaultUser, name:name, email:email, id:unique_id}))
     }
 }
 
