@@ -9,14 +9,13 @@ import {ModalAddUser} from "./ModalAddUser";
 const UsersTableContainer = () => {
     const users = useSelector<AppRootStateType, Array<Users>>(state=> state.users)
 
-
     return (
         <div className={'tableWrapper'}>
             <div className={'tableHeader'}>
                 <h3>User list</h3>
                 <ModalAddUser/>
             </div>
-            <UsersTable users={users}/>
+            {users.length > 0 ? <UsersTable users={users}/> : <div className={"empty-table"}>There are no more users </div>}
         </div>
 
     );

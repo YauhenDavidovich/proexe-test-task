@@ -49,3 +49,10 @@ button.descending::after {
   content: '↑';
   display: inline-block;
 }
+
+.empty-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

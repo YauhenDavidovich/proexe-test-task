@@ -1,9 +1,6 @@
 import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {fetchUsersTC} from "../bll/usersReducer";
-import PacksTable from "./UsersTable";
-import {AppRootStateType} from "../bll/store";
-import {Users} from "../dal/usersApi";
 import UsersTableContainer from "./UsersTableContainer";
 
 export const Dashboard = () => {

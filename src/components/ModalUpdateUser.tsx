@@ -1,15 +1,14 @@
 import * as React from "react";
-import {ChangeEvent} from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {SuperButton} from "./SuperButton";
 import {useFormik} from "formik";
-import {addUserTC, updateUserTC} from "../bll/usersReducer";
+import {updateUserTC} from "../bll/usersReducer";
 
 type FormikErrorType = {
     name?: string
