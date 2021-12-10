@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import {useDispatch} from "react-redux";
 import {SuperButton} from "./SuperButton";
+import {deleteUserTC} from "../bll/usersReducer";
 
 
 type ModalDeleteUserPropsType = {
@@ -23,7 +24,7 @@ export const ModalDeleteUser = (props: ModalDeleteUserPropsType) => {
     };
 
     const handleDeleteUser = () => {
-        console.log(props.userId)
+        dispatch(deleteUserTC(props.userId))
         setOpen(false);
     }
 
