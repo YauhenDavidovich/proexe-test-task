@@ -3,13 +3,11 @@ import {Users} from "../dal/usersApi";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../bll/store";
 import UsersTable from "./UsersTable";
-import {Button} from "@mui/material";
 import {ModalAddUser} from "./ModalAddUser";
 
 
 const UsersTableContainer = () => {
     const users = useSelector<AppRootStateType, Array<Users>>(state=> state.users)
-
 
 
     return (
